@@ -9,7 +9,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>@yield('title', 'LaraBBS') - LaraBBS Blog System</title>
+  <title>@yield('title', 'LaraBBS') - Laravel Blog System</title>
 
   <!-- Styles -->
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
