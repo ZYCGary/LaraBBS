@@ -14,3 +14,6 @@
 Route::get('/', 'PagesController@root')->name('root');
 
 Auth::routes();
+
+// Enable force email verification for register
+Auth::routes(['verify' => true]);
