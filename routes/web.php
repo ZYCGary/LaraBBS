@@ -17,3 +17,9 @@ Auth::routes();
 
 // Enable force email verification for register
 Auth::routes(['verify' => true]);
+
+// Create resource route for user profile management
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+// Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+// Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
+// Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
