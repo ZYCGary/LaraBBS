@@ -25,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Set auto-authentication stretagy
+        Gate::guessPolicyNamesUsing(function ($modelClass) {
+            // Auto return Policy according to Model used.
+            // eg: 'App\Model\User' => 'App\Policies\UserPolicy'
+            return 'App\Policies\\'.class_basename($modelClass).'Policy';
+        });
     }
 }
