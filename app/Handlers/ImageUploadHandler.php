@@ -15,7 +15,8 @@ class ImageUploadHandler
     | Handle Image Upload
     |--------------------------------------------------------------------------
     |
-    | This handler is responsible for handling user's image uploading activities. 
+    | This handler is responsible for handling user's image uploading
+    | activities. 
     | Uploaded images will be save under 'public' folder in a structrued form.
     |
     */
