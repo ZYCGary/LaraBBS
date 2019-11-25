@@ -16,7 +16,7 @@
                 <li class="nav-item {{ category_nav_active(2) }}"><a class="nav-link" href="{{ route('categories.show', 2) }}">TUTORIAL</a></li>
                 <li class="nav-item {{ category_nav_active(3) }}"><a class="nav-link" href="{{ route('categories.show', 3) }}">Q&A</a></li>
                 <li class="nav-item {{ category_nav_active(4) }}"><a class="nav-link" href="{{ route('categories.show', 4) }}">NOTICE</a></li>
-              </ul>
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav navbar-right">
@@ -25,6 +25,11 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">LOG IN</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">SIGN UP</a></li>
                 @else
+                <li class="nav-item">
+                    <a class="nav-link mt-1 mr-3 font-weight-bold" href="{{ route('topics.create') }}">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{ Auth::user()->avatar }}" class="img-responsive img-circle" width="30px" height="30px">
