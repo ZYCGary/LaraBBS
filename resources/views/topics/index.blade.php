@@ -12,11 +12,18 @@
     </div>
     @endif
     <div class="card ">
-
       <div class="card-header bg-transparent">
         <ul class="nav nav-pills">
-          <li class="nav-item"><a class="nav-link active" href="#">Latest Replied</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Latest Posted</a></li>
+          <li class="nav-item">
+            <a class="nav-link {{ active_class( ! if_query('order', 'recent')) }}" href="{{ Request::url() }}?order=default">
+              Recent Replied
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ active_class(if_query('order', 'recent')) }}" href="{{ Request::url() }}?order=recent">
+              Recent Posted
+            </a>
+          </li>
         </ul>
       </div>
 
