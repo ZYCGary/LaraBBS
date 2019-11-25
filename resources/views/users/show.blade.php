@@ -21,15 +21,19 @@
   <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
     <div class="card ">
       <div class="card-body">
-          <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
+        <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
       </div>
     </div>
     <hr>
 
     {{-- User's posts --}}
-    <div class="card ">
+    <div class="card">
       <div class="card-body">
-        No Posts ~_~
+        <ul class="nav nav-tabs">
+          <li class="nav-item"><a class="nav-link active bg-transparent" href="#">Topics</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Replies</a></li>
+        </ul>
+        @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
       </div>
     </div>
 

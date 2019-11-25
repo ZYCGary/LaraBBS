@@ -35,7 +35,7 @@
                         <a class="dropdown-item" href="{{ route('users.edit', Auth::id()) }}">Edit Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" id="logout" href="#">
-                            <form action="{{ route('logout') }}" method="POST">
+                            <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Are you sure you want to log out?');">
                                 {{ csrf_field() }}
                                 <button class="btn btn-block btn-danger" type="submit" name="button">LOG OUT</button>
                             </form>

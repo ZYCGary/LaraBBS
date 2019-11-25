@@ -7,7 +7,7 @@ class Topic extends Model
     protected $fillable = ['title', 'body', 'user_id', 'category_id', 'reply_count', 'view_count', 'last_reply_user_id', 'order', 'excerpt', 'slug'];
 
     /**
-     * Identify the relationship between Topic and Category.
+     * Get the topic's category.
      */
     public function category()
     {
@@ -15,7 +15,7 @@ class Topic extends Model
     }
 
     /**
-     * Identify the relationship between Topic and User.
+     * Get the user who posts the topic.
      */
     public function user()
     {
