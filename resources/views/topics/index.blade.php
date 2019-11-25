@@ -18,7 +18,7 @@
       <div class="card-body">
         {{-- Topic list --}}
         @include('topics._topic_list', ['topics' => $topics])
-        {{-- Page Exception --}}
+        {{-- Paginate --}}
         <div class="mt-5">
           {!! $topics->appends(Request::except('page'))->render() !!}
         </div>
