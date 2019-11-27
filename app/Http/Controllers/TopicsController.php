@@ -46,7 +46,9 @@ class TopicsController extends Controller
     public function edit(Topic $topic)
     {
         $this->authorize('update', $topic);
-        return view('topics.create_and_edit', compact('topic'));
+        $categories = Category::all();
+
+        return view('topics.create_and_edit', compact('topic', 'categories'));
     }
 
     public function update(TopicRequest $request, Topic $topic)
@@ -54,7 +56,7 @@ class TopicsController extends Controller
         $this->authorize('update', $topic);
         $topic->update($request->all());
 
-        return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
+        return redirect()->route('topics.show', $topic->id)->with('success', 'Updated successfully.');
     }
 
     public function destroy(Topic $topic)
@@ -65,11 +67,12 @@ class TopicsController extends Controller
         return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
     }
 
-    public function uploadImage(Request $request, ImageUploadHandler $uploader) {
+    public function uploadImage(Request $request, ImageUploadHandler $uploader)
+    {
         // Initialise return data, default is upload fails.
         $data = [
-            'success'   => false,
-            'msg'       => 'Upload fails!',
+            'success' => false,
+            'msg' => 'Upload fails!',
             'file_path' => ''
         ];
         // Check whether there are images need to be uploaded.
@@ -79,8 +82,8 @@ class TopicsController extends Controller
             // return upload success data
             if ($result) {
                 $data['file_path'] = $result['path'];
-                $data['msg']       = "Upload success!";
-                $data['success']   = true;
+                $data['msg'] = "Upload success!";
+                $data['success'] = true;
             }
         }
         return $data;
