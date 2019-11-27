@@ -23,6 +23,13 @@ class Topic extends Model
     }
 
     /**
+     * Get the replies of the topic.
+     */
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+    /**
      * Sort topics with specific order.
      */
     public function scopeWithOrder($query, $order)

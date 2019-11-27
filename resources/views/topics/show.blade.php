@@ -43,16 +43,26 @@
             {!! $topic->body !!}
           </div>
 
+
           <div class="operate">
             <hr>
-            <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
-              <i class="far fa-edit"></i> Edit
-            </a>
-            <a href="#" class="btn btn-outline-secondary btn-sm" role="button">
-              <i class="far fa-trash-alt"></i> Delete
-            </a>
+            @can('update', $topic)
+              <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
+                <i class="far fa-edit"></i> Edit
+              </a>
+            @endcan
+            @can('destroy', $topic)
+              <form action="{{ route('topics.destroy', $topic->id) }}" method="post"
+                    style="display: inline-block;"
+                    onsubmit="return confirm('Are your sure you want to delete this topic?');">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-outline-secondary btn-sm">
+                  <i class="far fa-trash-alt"></i> Delete
+                </button>
+              </form>
+            @endcan
           </div>
-
         </div>
       </div>
     </div>
