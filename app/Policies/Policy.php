@@ -15,8 +15,9 @@ class Policy
 
     public function before($user, $ability)
 	{
-	    // if ($user->isSuperAdmin()) {
-	    // 		return true;
-	    // }
+        // If user has the permission of 'manage_content', give the authentication.
+        if ($user->can('manage_contents')) {
+            return true;
+        }
 	}
 }
