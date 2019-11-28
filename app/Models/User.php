@@ -71,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     }
 
     /**
-     * Eloquent Mutator: Get user's password
+     * Eloquent Mutator: Encrypt user's password
      *
      * @param string $value
      * @return void
@@ -86,6 +86,12 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->attributes['password'] = $value;
     }
 
+    /**
+     * Eloquent Mutator: Prefix user image file path
+     *
+     * @param string $path
+     * @return void
+     */
     public function setAvatarAttribute($path)
     {
         // If the image path doesn't start with 'http', then it should be uploaded via admin panel, a pre-fix is needed.
