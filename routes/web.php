@@ -24,8 +24,19 @@ Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit'
 // Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
 // Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+/**
+ * Topic routers
+ */
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+/**
+ * Topic category routers
+ */
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
+
+/**
+ * Reply routers
+ */
 Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
