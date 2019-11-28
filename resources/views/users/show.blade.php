@@ -26,7 +26,7 @@
     </div>
     <hr>
 
-    {{-- User's post --}}
+    {{-- User's posts --}}
     <div class="card ">
       <div class="card-body">
         <ul class="nav nav-tabs">
