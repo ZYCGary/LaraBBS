@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Topic;
-use function GuzzleHttp\Psr7\str;
 use Illuminate\Support\Str;
 
 // creating, created, updating, updated, saving,

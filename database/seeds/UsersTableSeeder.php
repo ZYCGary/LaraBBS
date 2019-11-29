@@ -31,20 +31,20 @@ class UsersTableSeeder extends Seeder
             ->times(10)
             ->make()
             ->each(function ($user, $index)
-            use ($faker, $avatars) 
+            use ($faker, $avatars)
             {
                 // Add avatar randomly
                 $user->avatar = $faker->randomElement($avatars);
             });
 
         // Make $hidden attributes visible
-        $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();
+        $user_array = $users->makeVisable(['password', 'remember_token'])->toArray();
 
         // Insert data into the database
         User::insert($user_array);
 
         // Config data of the first user
-        $user = User::find(1);
+        $user = User::all()->find(1);
         $user->name = 'Jobs';
         $user->email = 'jobs@test.com';
         $user->avatar = 'http://larabbs.test/uploads/images/avatars/201911/24/1_1574558487_NAziUJi8hr.png';

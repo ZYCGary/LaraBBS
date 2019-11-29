@@ -7,6 +7,7 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Http\Requests\TopicRequest;
 use App\Models\Category;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class TopicsController extends Controller
@@ -18,14 +19,14 @@ class TopicsController extends Controller
 
     public function index(Request $request, Topic $topic)
     {
-        $topics = $topic->withOrder($request->order)->with('user', 'category')->paginate(30);
+        $topics = $topic->withOrder($request->input('order'))->with('user', 'category')->paginate(30);
         return view('topics.index', compact('topics'));
     }
 
     public function show(Request $request,Topic $topic)
     {
         // Fix URL with slug included
-        if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
+        if ( ! empty($topic->slug) && $topic->slug != $request->input('slug')) {
             return redirect($topic->link(), 301);
         }
 
@@ -71,6 +72,11 @@ class TopicsController extends Controller
         return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
     }
 
+    /**
+     * @param Request $request
+     * @param ImageUploadHandler $uploader
+     * @return array
+     */
     public function uploadImage(Request $request, ImageUploadHandler $uploader)
     {
         // Initialise return data, default is upload fails.
@@ -80,8 +86,10 @@ class TopicsController extends Controller
             'file_path' => ''
         ];
         // Check whether there are images need to be uploaded.
-        if ($file = $request->upload_file) {
+        if ($file = $request->input('upload_file')) {
+
             // Save image under public\uploads\images\topics
+            /** @var UploadedFile $file */
             $result = $uploader->save($file, 'topics', Auth::id(), 1024);
             // return upload success data
             if ($result) {

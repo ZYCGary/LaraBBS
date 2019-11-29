@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\{Reply, Topic, User};
+use App\Observers\ReplyObserver;
+use App\Observers\TopicObserver;
+use App\Observers\UserObserver;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
         if (app()->isLocal()) {
             $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
         }
+
+        // Load Laravel-Helper
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(IdeHelperServiceProvider::class);
+        }
     }
 
     /**
@@ -26,9 +36,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
 	{
-		\App\Models\User::observe(\App\Observers\UserObserver::class);
-		\App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
-		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
+		User::observe(UserObserver::class);
+		Reply::observe(ReplyObserver::class);
+		Topic::observe(TopicObserver::class);
 
         //
     }

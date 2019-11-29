@@ -2,14 +2,56 @@
 
 namespace App\Models;
 
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
+use Illuminate\Database\Eloquent\{Builder, Collection, Relations\HasMany};
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\{DatabaseNotification, DatabaseNotificationCollection, Notifiable};
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Spatie\Permission\Models\{Permission, Role};
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Carbon, Str};
 
-
+/**
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $avatar
+ * @property string|null $introduction
+ * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read Collection|Permission[] $permissions
+ * @property-read int|null $permissions_count
+ * @property-read Collection|Reply[] $replies
+ * @property-read int|null $replies_count
+ * @property-read Collection|Role[] $roles
+ * @property-read int|null $roles_count
+ * @property-read Collection|Topic[] $topics
+ * @property-read int|null $topics_count
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User permission($permissions)
+ * @method static Builder|User query()
+ * @method static Builder|User role($roles, $guard = null)
+ * @method static Builder|User whereAvatar($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailVerifiedAt($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereIntroduction($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereUpdatedAt($value)
+ * @mixin Eloquent
+ */
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use Notifiable, MustVerifyEmailTrait, HasRoles;
@@ -44,6 +86,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     /**
      * Get the topics that posted by the user.
+     *
+     * @return HasMany
      */
     public function topics()
     {
@@ -52,6 +96,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     /**
      * Get the replies posted by the user.
+     *
+     * @return HasMany
      */
     public function replies()
     {
@@ -59,11 +105,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
     }
 
     /**
-     * Check whether the user is the author of specific model
+     * Check whether the user is the author of specific model.
      *
-     * @param Topic $model
-     * @return boolean
-     *
+     * @param $model
+     * @return bool
      */
     public function isAuthorOf($model)
     {

@@ -3,14 +3,15 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 
 class EnsureEmailIsVerified
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -20,13 +21,13 @@ class EnsureEmailIsVerified
         // 2. User does not verify email
         // 3. User does not visit email URL/logout URL
         if ($request->user() &&
-            ! $request->user()->hasVerifiedEmail() &&
-            ! $request->is('email/*', 'logout')) {
+            !$request->user()->hasVerifiedEmail() &&
+            !$request->is('email/*', 'logout')) {
 
             // Client activities
             return $request->expectsJson()
-                        ? abort(403, 'Your email address is not verified.')
-                        : redirect()->route('verification.notice');
+                ? abort(403, 'Your email address is not verified.')
+                : redirect()->route('verification.notice');
         }
 
         return $next($request);

@@ -3,7 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
+/**
+ * @property mixed avatar
+ */
 
 class UserRequest extends FormRequest
 {
@@ -33,7 +37,7 @@ class UserRequest extends FormRequest
     }
     /**
      * Set error messages for invalid input
-     * 
+     *
      * @return array
      */
     public function messages()

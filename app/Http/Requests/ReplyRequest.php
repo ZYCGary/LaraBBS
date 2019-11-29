@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests;
 
+/**
+ * @property mixed content_body
+ * @property mixed topic_id
+ */
 class ReplyRequest extends Request
 {
     public function rules()
