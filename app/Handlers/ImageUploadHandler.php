@@ -3,6 +3,7 @@
 namespace App\Handlers;
 
 use Illuminate\Http\UploadedFile;
+use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
@@ -79,7 +80,7 @@ class ImageUploadHandler
         $image = Image::make($file_path);
 
         // Resize image
-        $image->resize($max_width, null, function ($constraint) {
+        $image->resize($max_width, null, function (Constraint $constraint) {
 
             // Adjust size, maintaining aspect ratio.
             $constraint->aspectRatio();
