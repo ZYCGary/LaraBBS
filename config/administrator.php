@@ -61,8 +61,6 @@ return array(
     'menu' => [
         'Users & Permissions' => [
             'users',
-            'roles',
-            'permissions',
         ]
     ],
 
