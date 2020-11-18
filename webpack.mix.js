@@ -16,3 +16,9 @@ mix.js('resources/js/app.js', 'public/js')
     .version()
     .copyDirectory('resources/editor/js', 'public/js')
     .copyDirectory('resources/editor/css', 'public/css');
+
+if (!mix.config.production) {
+    mix.browserSync({
+        proxy: 'larabbs.test',
+    });
+}

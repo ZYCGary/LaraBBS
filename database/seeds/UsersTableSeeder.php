@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             });
 
         // Make $hidden attributes visible
-        $user_array = $users->makeVisable(['password', 'remember_token'])->toArray();
+        $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();
 
         // Insert data into the database
         User::insert($user_array);

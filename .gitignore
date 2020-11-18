@@ -107,3 +107,5 @@ modules.xml
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/phpstorm+all
+public/packages/summerblue/administrator/.DS_Store
+public/packages/summerblue/administrator/.DS_Store

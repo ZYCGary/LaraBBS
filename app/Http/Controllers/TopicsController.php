@@ -26,9 +26,9 @@ class TopicsController extends Controller
     public function show(Request $request,Topic $topic)
     {
         // Fix URL with slug included
-        if ( ! empty($topic->slug) && $topic->slug != $request->input('slug')) {
+        /*if ( ! empty($topic->slug) && $topic->slug != $request->input('slug')) {
             return redirect($topic->link(), 301);
-        }
+        }*/
 
         return view('topics.show', compact('topic'));
     }
